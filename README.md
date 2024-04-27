@@ -22,3 +22,7 @@ Initially when we want to train, we set the mode to TRAIN
 
 Later while replaying using the trained model, we can set the mode to PLAY
 * mode = PLAY
+
+
+*OBSERVATIONS*
+To be updated
