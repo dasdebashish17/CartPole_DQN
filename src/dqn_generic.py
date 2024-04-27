@@ -120,9 +120,6 @@ def select_action(state):
         return torch.tensor([[env.action_space.sample()]], device=device, dtype=torch.long)
 
 
-episode_durations = []
-
-
 def optimize_model():
     if len(memory) < BATCH_SIZE:
         return
@@ -175,7 +172,9 @@ def optimize_model():
 if torch.cuda.is_available():
     num_episodes = 600
 else:
-    num_episodes = 600
+    num_episodes = 10
+
+episode_durations = []
 
 for i_episode in range(num_episodes):
     # Initialize the environment and get its state
@@ -215,6 +214,14 @@ for i_episode in range(num_episodes):
             print(f"Episode:{i_episode} => cumulative_return:{cumulative_return}")
             break
 
+# save the model
+
+plt.plot(episode_durations)
+plt.xlabel("Return per episode")
+plt.ylabel("Return")
+plt.title("Convergence of returns")
+plt.savefig("return_convergence.jpg")
+plt.show()
 print('Complete')
 plt.ioff()
 plt.show()
